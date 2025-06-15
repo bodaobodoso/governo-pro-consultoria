@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -212,7 +211,7 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="mb-10">
+            <div className="mb-4">
               <Button 
                 onClick={() => setShowForm(true)}
                 size="lg" 
@@ -221,7 +220,7 @@ const Index = () => {
                 Iniciar Consultoria Gratuita
               </Button>
             </div>
-            
+
             <div className="mb-10">
               {/* Mobile Carousel */}
               <div className="block md:hidden">
