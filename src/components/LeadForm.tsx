@@ -99,7 +99,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
         { key: 'email', label: 'E-mail', type: 'email', required: true },
         { key: 'temWhatsapp', label: 'Este telefone tem WhatsApp?', type: 'radio', required: true, options: ['Sim', 'Não'] },
         { key: 'telefone', label: 'Telefone', type: 'tel', required: true, conditional: true, showWhen: 'Não' },
-        { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante (se diferente)', type: 'tel', required: false, conditional: true, showWhen: 'Sim' }
+        { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante', type: 'tel', required: false, conditional: true, showWhen: 'Sim' }
       ]
     },
     {
