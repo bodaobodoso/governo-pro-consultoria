@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,8 +11,17 @@ interface LeadFormProps {
   onBack?: () => void;
 }
 
+interface CNPJData {
+  numeroInscricao?: string;
+  razaoSocial?: string;
+  situacaoCadastral?: string;
+  atividadePrincipal?: string;
+  dataAbertura?: string;
+}
+
 const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [cnpjData, setCnpjData] = useState<CNPJData>({});
   const [formData, setFormData] = useState({
     nomeCompleto: '',
     email: '',
@@ -41,11 +49,42 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     };
   }, [currentStep]);
 
+  // Function to fetch CNPJ data from API
+  const fetchCNPJData = async (cnpj: string) => {
+    try {
+      // Remove any formatting from CNPJ
+      const cleanCNPJ = cnpj.replace(/[^\d]/g, '');
+      
+      if (cleanCNPJ.length === 14) {
+        // Here you would call your CNPJ API
+        // For now, setting mock data structure
+        const mockData: CNPJData = {
+          numeroInscricao: cleanCNPJ,
+          razaoSocial: 'Empresa Exemplo LTDA',
+          situacaoCadastral: 'Ativa',
+          atividadePrincipal: 'Desenvolvimento de software',
+          dataAbertura: '01/01/2020'
+        };
+        
+        setCnpjData(mockData);
+        console.log('CNPJ data fetched:', mockData);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados do CNPJ:', error);
+      setCnpjData({});
+    }
+  };
+
   const updateFormData = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
+
+    // If CNPJ field is updated, fetch company data
+    if (field === 'cnpj') {
+      fetchCNPJData(value);
+    }
   };
 
   const validateEmail = (email: string) => {
@@ -282,8 +321,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
       <div className="text-center space-y-6">
         {/* Success Icon */}
         <div className="flex justify-center">
-          <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
-            <CheckCircle className="w-10 h-10 text-blue-600" />
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+            <Trophy className="w-10 h-10 text-green-600" />
           </div>
         </div>
 
@@ -293,20 +332,20 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
             Obrigado, {formData.nomeCompleto}!
           </h2>
           <p className="text-lg text-gray-600">
-            Seus dados foram recebidos e nossa análise está em andamento
+            Sua análise está sendo processada
           </p>
         </div>
 
         {/* Analysis Summary */}
-        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
           <h3 className="font-semibold text-gray-800 mb-4 flex items-center justify-center">
-            <Target className="w-5 h-5 text-blue-600 mr-2" />
+            <Target className="w-5 h-5 text-green-600 mr-2" />
             Resumo das Informações Enviadas
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div className="bg-white rounded-lg p-3 border">
               <div className="font-medium text-gray-700 mb-1">Setor</div>
-              <div className="text-blue-600">{formData.setorEmpresa || 'Não informado'}</div>
+              <div className="text-green-600">{formData.setorEmpresa || 'Não informado'}</div>
             </div>
             <div className="bg-white rounded-lg p-3 border">
               <div className="font-medium text-gray-700 mb-1">Experiência</div>
@@ -314,11 +353,40 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
             </div>
             <div className="bg-white rounded-lg p-3 border">
               <div className="font-medium text-gray-700 mb-1">Investimento</div>
-              <div className="text-blue-600">{formData.investimento || 'Não informado'}</div>
+              <div className="text-purple-600">{formData.investimento || 'Não informado'}</div>
             </div>
             <div className="bg-white rounded-lg p-3 border">
               <div className="font-medium text-gray-700 mb-1">Cargo</div>
-              <div className="text-blue-600">{formData.cargo || 'Não informado'}</div>
+              <div className="text-orange-600">{formData.cargo || 'Não informado'}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Company Information from CNPJ API */}
+        <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
+          <h3 className="font-semibold text-gray-800 mb-4 text-center">
+            Informações da Empresa
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Número de Inscrição</div>
+              <div className="text-blue-600">{cnpjData.numeroInscricao || formData.cnpj || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Razão Social</div>
+              <div className="text-blue-600">{cnpjData.razaoSocial || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Situação Cadastral</div>
+              <div className="text-blue-600">{cnpjData.situacaoCadastral || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Atividade Principal</div>
+              <div className="text-blue-600">{cnpjData.atividadePrincipal || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border md:col-span-2">
+              <div className="font-medium text-gray-700 mb-1">Data de Abertura</div>
+              <div className="text-blue-600">{cnpjData.dataAbertura || 'Não informado'}</div>
             </div>
           </div>
         </div>
@@ -335,8 +403,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
                 <span className="text-white text-xs font-bold">1</span>
               </div>
               <div className="text-left">
-                <div className="font-medium text-gray-800">Análise em Processamento</div>
-                <div className="text-sm text-gray-600">Nossa equipe especializada está analisando seu perfil empresarial</div>
+                <div className="font-medium text-gray-800">Análise Detalhada</div>
+                <div className="text-sm text-gray-600">Nossa equipe irá preparar uma análise personalizada do seu perfil</div>
               </div>
             </div>
             <div className="flex items-start space-x-3">
@@ -344,8 +412,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
                 <span className="text-white text-xs font-bold">2</span>
               </div>
               <div className="text-left">
-                <div className="font-medium text-gray-800">Contato Executivo</div>
-                <div className="text-sm text-gray-600">Um consultor especializado entrará em contato em até 24 horas</div>
+                <div className="font-medium text-gray-800">Contato Personalizado</div>
+                <div className="text-sm text-gray-600">Um especialista entrará em contato em até 24 horas</div>
               </div>
             </div>
             <div className="flex items-start space-x-3">
@@ -353,21 +421,21 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
                 <span className="text-white text-xs font-bold">3</span>
               </div>
               <div className="text-left">
-                <div className="font-medium text-gray-800">Proposta Personalizada</div>
-                <div className="text-sm text-gray-600">Receberá uma estratégia customizada para seu negócio</div>
+                <div className="font-medium text-gray-800">Estratégia Customizada</div>
+                <div className="text-sm text-gray-600">Receberá um plano de ação específico para seu negócio</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Contact Information */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-6 text-white">
+        <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-6 text-white">
           <div className="flex items-center justify-center mb-3">
             <Phone className="w-6 h-6 mr-2" />
-            <h3 className="font-semibold text-lg">Informações de Contato Confirmadas</h3>
+            <h3 className="font-semibold text-lg">Fique Tranquilo!</h3>
           </div>
-          <p className="text-blue-100 mb-2">
-            Nossa equipe especializada entrará em contato através dos canais informados:
+          <p className="text-green-100 mb-2">
+            Nossa equipe especializada entrará em contato com você através do WhatsApp ou e-mail informado.
           </p>
           <div className="text-blue-100 text-sm space-y-1">
             <p>📧 {formData.email}</p>
