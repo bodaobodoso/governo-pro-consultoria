@@ -6,19 +6,28 @@ import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Star, CheckCircle, Shield, Users, ArrowLeft, Rocket, Clock, MousePointer } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Autoplay from "embla-carousel-autoplay";
 
 const Register = () => {
   const navigate = useNavigate();
 
   const handleCheckout = () => {
     console.log('Redirecionando para checkout...');
-    // Aqui você implementaria a integração com o sistema de pagamento
-    alert('Redirecionando para o pagamento seguro...');
+    try {
+      // Aqui você implementaria a integração com o sistema de pagamento
+      alert('Redirecionando para o pagamento seguro...');
+    } catch (error) {
+      console.error('Erro no checkout:', error);
+      alert('Erro ao processar pagamento. Tente novamente.');
+    }
   };
 
   const handleBack = () => {
-    navigate('/');
+    try {
+      navigate('/');
+    } catch (error) {
+      console.error('Erro na navegação:', error);
+      window.location.href = '/';
+    }
   };
 
   const features = [
@@ -54,6 +63,10 @@ const Register = () => {
               src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png" 
               alt="Mercado Nacional" 
               className="h-8 w-auto"
+              onError={(e) => {
+                console.log('Erro ao carregar logo');
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </div>
           
@@ -100,14 +113,7 @@ const Register = () => {
             {/* Features Section - Mobile: Carousel, Desktop: Grid */}
             <div className="text-center mb-6">
               <div className="block md:hidden">
-                <Carousel
-                  plugins={[
-                    Autoplay({
-                      delay: 3000,
-                    }),
-                  ]}
-                  className="w-full"
-                >
+                <Carousel className="w-full">
                   <CarouselContent>
                     {features.map((feature, index) => (
                       <CarouselItem key={index}>
