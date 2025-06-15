@@ -108,18 +108,6 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Link centralizado */}
-            <div className="text-center py-4">
-              <a 
-                href="https://education4kids.online/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 font-medium underline transition-colors"
-              >
-                https://education4kids.online/
-              </a>
-            </div>
-
             {/* Botão de checkout */}
             <Button
               onClick={handleCheckout}
