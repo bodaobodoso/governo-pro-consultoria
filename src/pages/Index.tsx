@@ -206,10 +206,20 @@ const Index = () => {
               </h1>
             </div>
             
-            <div className="mb-10 max-w-3xl mx-auto">
+            <div className="mb-8 max-w-3xl mx-auto">
               <p className="text-lg sm:text-xl md:text-2xl text-slate-700 font-medium leading-relaxed">
                 Aproveite as oportunidades da <span className="text-green-600 font-bold">LOA 2025</span> e transforme sua empresa em um fornecedor oficial do governo brasileiro
               </p>
+            </div>
+
+            <div className="mb-10">
+              <Button 
+                onClick={() => setShowForm(true)}
+                size="lg" 
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Iniciar Consultoria Gratuita
+              </Button>
             </div>
             
             <div className="mb-10">
@@ -261,19 +271,9 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
-                onClick={() => setShowForm(true)}
-                size="lg" 
-                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                Iniciar Consultoria Gratuita
-              </Button>
-              
-              <div className="flex items-center text-slate-600 text-sm">
-                <Clock className="w-4 h-4 mr-2" />
-                Processo leva apenas 5 minutos
-              </div>
+            <div className="flex items-center justify-center text-slate-600 text-sm">
+              <Clock className="w-4 h-4 mr-2" />
+              Processo leva apenas 5 minutos
             </div>
           </div>
         </div>
