@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Building, User } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Clock, Building, User, Rocket, MousePointer, Shield } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 import LoginArea from '@/components/LoginArea';
+import Autoplay from "embla-carousel-autoplay";
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
@@ -24,6 +26,29 @@ const Index = () => {
   const handleCloseLogin = () => {
     setShowLogin(false);
   };
+
+  const features = [
+    {
+      icon: <Rocket className="w-12 h-12 text-blue-500" />,
+      title: "+ Performance",
+      description: "Encontre as melhores oportunidades para o seu negócio"
+    },
+    {
+      icon: <Clock className="w-12 h-12 text-blue-500" />,
+      title: "+ Praticidade",
+      description: "Cadastre as suas propostas com facilidade e agilidade"
+    },
+    {
+      icon: <MousePointer className="w-12 h-12 text-blue-500" />,
+      title: "+ Otimização",
+      description: "Dispute vários pregões ao mesmo tempo, de maneira segura e inteligente"
+    },
+    {
+      icon: <Shield className="w-12 h-12 text-blue-500" />,
+      title: "+ Segurança",
+      description: "Monitore o chat do pregão e não perca nenhuma convocação"
+    }
+  ];
 
   if (showForm) {
     return <LeadForm onBack={handleBackToIndex} />;
@@ -113,6 +138,56 @@ const Index = () => {
               <p className="text-lg sm:text-xl md:text-2xl text-slate-700 font-medium leading-relaxed">
                 Aproveite as oportunidades da <span className="text-green-600 font-bold">LOA 2025</span> e transforme sua empresa em um fornecedor oficial do governo brasileiro
               </p>
+            </div>
+            
+            {/* Features Section - Mobile: Carousel, Desktop: Grid */}
+            <div className="mb-10">
+              {/* Mobile Carousel */}
+              <div className="block md:hidden">
+                <Carousel
+                  plugins={[
+                    Autoplay({
+                      delay: 3000,
+                    }),
+                  ]}
+                  className="w-full max-w-sm mx-auto"
+                >
+                  <CarouselContent>
+                    {features.map((feature, index) => (
+                      <CarouselItem key={index}>
+                        <div className="p-4 text-center bg-white rounded-lg shadow-md mx-2">
+                          <div className="flex justify-center mb-4">
+                            {feature.icon}
+                          </div>
+                          <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                            {feature.title}
+                          </h4>
+                          <p className="text-sm text-gray-600">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+              </div>
+
+              {/* Desktop Grid */}
+              <div className="hidden md:grid grid-cols-4 gap-6 max-w-6xl mx-auto">
+                {features.map((feature, index) => (
+                  <div key={index} className="text-center bg-white rounded-lg shadow-md p-6">
+                    <div className="flex justify-center mb-4">
+                      {feature.icon}
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                      {feature.title}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
             
             {/* Botão e informação de tempo exatos da imagem */}
