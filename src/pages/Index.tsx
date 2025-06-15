@@ -74,18 +74,19 @@ const Index = () => {
             </Badge>
             
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-gray-900 mb-6 sm:mb-8 leading-tight">
-              <span className="text-green-600 drop-shadow-lg">R$ 5,8 Trilhões</span>
+              <span className="text-green-600 drop-shadow-lg">O Governo Compra</span>
               <br />
-              <span className="text-blue-700 drop-shadow-lg">Liberados pelo</span>
+              <span className="text-blue-700 drop-shadow-lg">Bilhões Todos os Anos.</span>
               <br />
               <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-                Governo Federal
+                Descubra Como Vender Para Ele!
               </span>
             </h1>
             
             <p className="text-base sm:text-xl md:text-2xl text-gray-700 mb-8 sm:mb-10 max-w-4xl mx-auto font-medium px-4">
-              Aproveite as oportunidades da <strong className="text-green-600">LOA 2025</strong> e 
-              transforme sua empresa em um fornecedor oficial do governo brasileiro
+              O Governo Acaba de Liberar <strong className="text-green-600">R$ 5,8 Trilhões</strong> Para Pagamentos Públicos – E Você Pode Aproveitar Isso Agora!
+              <br />
+              Faça uma análise rápida e descubra se sua empresa está pronta para receber pagamentos lucrativos com o governo e aproveitar as oportunidades da <strong className="text-blue-600">LOA 2025</strong>.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
