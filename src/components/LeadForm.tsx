@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ArrowRight, CheckCircle, TrendingUp, Target, AlertTriangle, Trophy, Users, Calendar, Phone } from 'lucide-react';
 
@@ -16,6 +17,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     nomeCompleto: '',
     email: '',
     telefone: '',
+    temWhatsapp: '',
+    whatsappSocio: '',
     cnpj: '',
     cargo: '',
     faturamentoAnual: '',
@@ -46,7 +49,35 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     }));
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateStep = () => {
+    const currentFields = steps[currentStep].fields;
+    if (!currentFields) return true;
+
+    for (const field of currentFields) {
+      const value = formData[field.key as keyof typeof formData];
+      
+      if (field.required && !value) {
+        return false;
+      }
+      
+      if (field.key === 'email' && value && !validateEmail(value)) {
+        return false;
+      }
+    }
+    
+    return true;
+  };
+
   const nextStep = () => {
+    if (!validateStep()) {
+      return;
+    }
+    
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
@@ -66,7 +97,9 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
       fields: [
         { key: 'nomeCompleto', label: 'Nome Completo', type: 'text', required: true },
         { key: 'email', label: 'E-mail', type: 'email', required: true },
-        { key: 'telefone', label: 'Telefone', type: 'tel', required: true }
+        { key: 'telefone', label: 'Telefone Principal', type: 'tel', required: true },
+        { key: 'temWhatsapp', label: 'Este telefone tem WhatsApp?', type: 'radio', required: true, options: ['Sim', 'Não'] },
+        { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante (se diferente)', type: 'tel', required: false, conditional: true }
       ]
     },
     {
@@ -95,15 +128,15 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           type: 'select', 
           required: true,
           options: [
-            'Acima de 1 Bilhão',
-            'De R$500 milhões a 1 Bilhão',
-            'De R$50 milhões a R$500 milhões ao ano',
-            'De R$10 milhões a R$50 milhões ao ano',
-            'De R$5 milhões a R$10 milhões ao ano',
-            'De R$1 milhão a R$5 milhões ao ano',
-            'De R$500 mil a R$1 milhão ao ano',
-            'Até R$500 mil ao ano',
-            'Menos de R$ 100 mil ao ano',
+            'Acima de R$ 500 milhões',
+            'De R$ 100 milhões a R$ 500 milhões',
+            'De R$ 50 milhões a R$ 100 milhões',
+            'De R$ 10 milhões a R$ 50 milhões',
+            'De R$ 5 milhões a R$ 10 milhões',
+            'De R$ 1 milhão a R$ 5 milhões',
+            'De R$ 500 mil a R$ 1 milhão',
+            'Até R$ 500 mil',
+            'Menos de R$ 100 mil',
             'Ainda não faturamos'
           ]
         }
@@ -150,11 +183,9 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           type: 'select', 
           required: true,
           options: [
-            'R$ 100 mil - R$ 250 mil',
-            'R$ 250 mil - R$ 500 mil',
+            'R$ 100 mil - R$ 500 mil',
             'R$ 500 mil - R$ 1 milhão',
-            'R$ 1 milhão - R$ 2,5 milhões',
-            'R$ 2,5 milhões - R$ 5 milhões',
+            'R$ 1 milhão - R$ 5 milhões',
             'R$ 5 milhões - R$ 10 milhões',
             'R$ 10 milhões - R$ 25 milhões',
             'R$ 25 milhões - R$ 50 milhões',
@@ -175,6 +206,35 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const progress = ((currentStep + 1) / steps.length) * 100;
 
   const renderField = (field: any) => {
+    // Don't show WhatsApp do sócio field if main phone has WhatsApp or if WhatsApp option not selected
+    if (field.key === 'whatsappSocio' && formData.temWhatsapp !== 'Sim') {
+      return null;
+    }
+
+    if (field.type === 'radio') {
+      return (
+        <div key={field.key} className="space-y-2">
+          <Label className="text-sm font-medium text-gray-700">
+            {field.label} {field.required && <span className="text-red-500">*</span>}
+          </Label>
+          <RadioGroup 
+            value={formData[field.key as keyof typeof formData]} 
+            onValueChange={(value) => updateFormData(field.key, value)}
+            className="flex flex-row space-x-4"
+          >
+            {field.options.map((option: string) => (
+              <div key={option} className="flex items-center space-x-2">
+                <RadioGroupItem value={option} id={`${field.key}-${option}`} />
+                <Label htmlFor={`${field.key}-${option}`} className="text-sm cursor-pointer">
+                  {option}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+      );
+    }
+
     if (field.type === 'select') {
       return (
         <div key={field.key} className="space-y-2">
@@ -207,9 +267,20 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           type={field.type}
           value={formData[field.key as keyof typeof formData]}
           onChange={(e) => updateFormData(field.key, e.target.value)}
-          className="h-10 border-2 border-gray-200 focus:border-green-500"
-          placeholder={`Digite seu ${field.label.toLowerCase()}`}
+          className={`h-10 border-2 border-gray-200 focus:border-green-500 ${
+            field.key === 'email' && formData.email && !validateEmail(formData.email) 
+              ? 'border-red-500 focus:border-red-500' 
+              : ''
+          }`}
+          placeholder={
+            field.key === 'whatsappSocio' 
+              ? 'WhatsApp do sócio/representante (opcional)'
+              : `Digite ${field.label.toLowerCase()}`
+          }
         />
+        {field.key === 'email' && formData.email && !validateEmail(formData.email) && (
+          <p className="text-red-500 text-xs">Por favor, insira um e-mail válido</p>
+        )}
       </div>
     );
   };
@@ -306,9 +377,13 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           <p className="text-green-100 mb-2">
             Nossa equipe especializada entrará em contato com você através do telefone ou e-mail informado.
           </p>
-          <p className="text-blue-100 text-sm">
-            📞 {formData.telefone} | 📧 {formData.email}
-          </p>
+          <div className="text-blue-100 text-sm space-y-1">
+            <p>📞 {formData.telefone}</p>
+            <p>📧 {formData.email}</p>
+            {formData.whatsappSocio && (
+              <p>📱 WhatsApp Sócio: {formData.whatsappSocio}</p>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -406,7 +481,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
 
                 <Button
                   onClick={nextStep}
-                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-1 h-8 px-3 text-sm"
+                  disabled={!validateStep()}
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-1 h-8 px-3 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span>{currentStep === steps.length - 2 ? 'Finalizar Análise' : 'Próximo'}</span>
                   <ArrowRight className="w-3 h-3" />
