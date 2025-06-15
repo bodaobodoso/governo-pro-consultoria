@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { User, Lock, Mail, Phone, Building, X, Star, CheckCircle, Shield, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginAreaProps {
   onClose: () => void;
 }
 
 const LoginArea: React.FC<LoginAreaProps> = ({ onClose }) => {
+  const navigate = useNavigate();
   const [currentView, setCurrentView] = useState<'login' | 'register' | 'purchase'>('login');
   const [formData, setFormData] = useState({
     email: '',
@@ -38,6 +40,11 @@ const LoginArea: React.FC<LoginAreaProps> = ({ onClose }) => {
     // Aqui você implementaria a integração com o sistema de pagamento
     alert('Redirecionando para o pagamento seguro...');
     onClose();
+  };
+
+  const handleRegisterRedirect = () => {
+    onClose();
+    navigate('/register');
   };
 
   const renderLogin = () => (
@@ -94,7 +101,7 @@ const LoginArea: React.FC<LoginAreaProps> = ({ onClose }) => {
           <div className="text-center pt-2">
             <button
               type="button"
-              onClick={() => setCurrentView('register')}
+              onClick={handleRegisterRedirect}
               className="text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline transition-colors"
             >
               Não tem conta? Cadastre-se
