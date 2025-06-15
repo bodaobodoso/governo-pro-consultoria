@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -242,31 +241,6 @@ const Index = () => {
           }}
         />
       </div>
-
-      {/* Header Gov.br Style */}
-      <header className="relative z-10 bg-white shadow-sm border-b-4 border-green-600">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img 
-                src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png" 
-                alt="Mercado Nacional" 
-                className="h-8 w-auto"
-              />
-              <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
-                <Shield className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-gray-800">Portal de Licitações</h1>
-                <p className="text-xs text-gray-600">Governo Federal</p>
-              </div>
-            </div>
-            <Badge className="bg-blue-600 text-white">
-              LOA 2025 - Ativo
-            </Badge>
-          </div>
-        </div>
-      </header>
 
       {/* Hero Section with Enhanced 3D Parallax */}
       <section className="relative min-h-screen flex items-center justify-center">
