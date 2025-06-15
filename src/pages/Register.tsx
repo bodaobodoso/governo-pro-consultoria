@@ -1,9 +1,12 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, CheckCircle, Shield, Users, ArrowLeft } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Star, CheckCircle, Shield, Users, ArrowLeft, Rocket, Clock, MousePointer } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Autoplay from "embla-carousel-autoplay";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,6 +20,29 @@ const Register = () => {
   const handleBack = () => {
     navigate('/');
   };
+
+  const features = [
+    {
+      icon: <Rocket className="w-12 h-12 text-blue-500" />,
+      title: "+ Performance",
+      description: "Encontre as melhores oportunidades para o seu negócio"
+    },
+    {
+      icon: <Clock className="w-12 h-12 text-blue-500" />,
+      title: "+ Praticidade",
+      description: "Cadastre as suas propostas com facilidade e agilidade"
+    },
+    {
+      icon: <MousePointer className="w-12 h-12 text-blue-500" />,
+      title: "+ Otimização",
+      description: "Dispute vários pregões ao mesmo tempo, de maneira segura e inteligente"
+    },
+    {
+      icon: <Shield className="w-12 h-12 text-blue-500" />,
+      title: "+ Segurança",
+      description: "Monitore o chat do pregão e não perca nenhuma convocação"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 flex items-center justify-center p-4">
@@ -42,7 +68,7 @@ const Register = () => {
         </div>
       </header>
 
-      <Card className="w-full max-w-lg bg-white border-0 shadow-2xl">
+      <Card className="w-full max-w-4xl bg-white border-0 shadow-2xl">
         <CardHeader className="text-center pb-4 pt-8">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center">
@@ -69,6 +95,60 @@ const Register = () => {
               <p className="text-sm text-gray-600">
                 Para acessar nossa plataforma completa de licitações, é necessário adquirir o acesso premium.
               </p>
+            </div>
+
+            {/* Processo leva apenas 5 minutos */}
+            <div className="text-center mb-6">
+              <p className="text-lg font-semibold text-gray-800 mb-8">
+                Processo leva apenas 5 minutos
+              </p>
+              
+              {/* Features Section - Mobile: Carousel, Desktop: Grid */}
+              <div className="block md:hidden">
+                <Carousel
+                  plugins={[
+                    Autoplay({
+                      delay: 3000,
+                    }),
+                  ]}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {features.map((feature, index) => (
+                      <CarouselItem key={index}>
+                        <div className="p-4 text-center">
+                          <div className="flex justify-center mb-4">
+                            {feature.icon}
+                          </div>
+                          <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                            {feature.title}
+                          </h4>
+                          <p className="text-sm text-gray-600">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                </Carousel>
+              </div>
+
+              {/* Desktop Grid */}
+              <div className="hidden md:grid grid-cols-4 gap-6">
+                {features.map((feature, index) => (
+                  <div key={index} className="text-center">
+                    <div className="flex justify-center mb-4">
+                      {feature.icon}
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                      {feature.title}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Oferta especial */}
