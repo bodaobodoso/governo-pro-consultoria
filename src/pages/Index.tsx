@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -336,12 +337,12 @@ const Index = () => {
             >
               <CarouselContent className="-ml-2 md:-ml-4">
                 {partnerCompanies.map((company, index) => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
-                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 h-24 flex items-center justify-center border border-gray-100">
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
+                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-6 h-20 sm:h-24 flex items-center justify-center border border-gray-100">
                       <img
                         src={company.logo}
                         alt={company.alt}
-                        className="max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        className="max-h-12 sm:max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
                         loading="lazy"
                       />
                     </div>
