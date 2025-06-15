@@ -78,7 +78,7 @@ const Register = () => {
               
               <div className="text-center mb-4">
                 <div className="text-4xl font-black text-green-600 mb-2">
-                  R$ 1.998,00
+                  12x de R$ 199,80
                 </div>
                 <div className="text-sm text-gray-600 line-through mb-1">
                   De R$ 4.997,00
