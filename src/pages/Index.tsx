@@ -94,7 +94,7 @@ const Index = () => {
                 size="lg" 
                 className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold rounded-lg shadow-2xl hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
-                Iniciar Qualificação Gratuita
+                Iniciar Consultoria Gratuita
               </Button>
               
               <div className="flex items-center text-gray-600 text-sm">
