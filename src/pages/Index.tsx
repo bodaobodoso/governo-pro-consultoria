@@ -31,17 +31,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-hidden">
-      {/* Header com botão de login à esquerda e banner à direita */}
+      {/* Header com logo à esquerda e botão de login à direita */}
       <header className="absolute top-0 left-0 right-0 z-20 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <Button 
-            onClick={() => setShowLogin(true)}
-            className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg transition-all duration-300 hover:shadow-xl"
-          >
-            <User className="w-4 h-4" />
-            Entrar
-          </Button>
-          
           <div className="flex items-center">
             <img 
               src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png" 
@@ -49,6 +41,14 @@ const Index = () => {
               className="h-8 w-auto"
             />
           </div>
+          
+          <Button 
+            onClick={() => setShowLogin(true)}
+            className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg transition-all duration-300 hover:shadow-xl"
+          >
+            <User className="w-4 h-4" />
+            <span className="hidden sm:inline">Entrar</span>
+          </Button>
         </div>
       </header>
 
