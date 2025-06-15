@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -70,6 +69,59 @@ const Index = () => {
       icon: <TrendingUp className="w-8 h-8 text-blue-600" />,
       title: "ROI de 800% em média",
       description: "Retorno do investimento comprovado pelos nossos clientes"
+    }
+  ];
+
+  const partnerCompanies = [
+    {
+      name: "Petrobras",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/image-5.png",
+      alt: "Petrobras"
+    },
+    {
+      name: "Ambev",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/Ambev_logo.svg.png",
+      alt: "Ambev"
+    },
+    {
+      name: "Energisa",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/Energisa.png",
+      alt: "Energisa"
+    },
+    {
+      name: "JBS",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/jbs.png",
+      alt: "JBS"
+    },
+    {
+      name: "Klabin",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/Klabin.png",
+      alt: "Klabin"
+    },
+    {
+      name: "Qualitest",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/logoQuali.png",
+      alt: "Qualitest"
+    },
+    {
+      name: "Marcopolo",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/marcopolo-logo-png_seeklogo-252638.png",
+      alt: "Marcopolo"
+    },
+    {
+      name: "Porto Seguro",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/porto-seguro-logo.png",
+      alt: "Porto Seguro"
+    },
+    {
+      name: "Votorantim",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/Votorantim.png",
+      alt: "Votorantim"
+    },
+    {
+      name: "WEG",
+      logo: "https://omercadonacional.com.br/wp-content/uploads/2025/04/Weg_logo_blue_vector.svg.png",
+      alt: "WEG"
     }
   ];
 
@@ -253,6 +305,56 @@ const Index = () => {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="relative py-16 px-4 sm:px-6 lg:px-8 bg-white/70 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <span className="text-green-600">Empresas</span> que <span className="text-blue-600">confiam</span> em nós
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Grandes corporações já utilizam nossa plataforma para acessar oportunidades no mercado público
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <Carousel
+              plugins={[
+                Autoplay({
+                  delay: 2000,
+                }),
+              ]}
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {partnerCompanies.map((company, index) => (
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5">
+                    <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6 h-24 flex items-center justify-center border border-gray-100">
+                      <img
+                        src={company.logo}
+                        alt={company.alt}
+                        className="max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-500">
+              E muitas outras empresas de diversos setores da economia brasileira
+            </p>
           </div>
         </div>
       </section>
