@@ -22,7 +22,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     setorEmpresa: '',
     experienciaLicitacoes: '',
     principalObjetivo: '',
-    tempoImplementacao: '',
     investimento: ''
   });
 
@@ -141,18 +140,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
             'Aumentar o número de contratos',
             'Melhorar a taxa de sucesso',
             'Expandir para novos órgãos'
-          ]
-        },
-        { 
-          key: 'tempoImplementacao', 
-          label: 'Tempo para Implementação', 
-          type: 'select', 
-          required: true,
-          options: [
-            'Imediato (este mês)',
-            '1-3 meses',
-            '3-6 meses',
-            'Acima de 6 meses'
           ]
         },
         { 
