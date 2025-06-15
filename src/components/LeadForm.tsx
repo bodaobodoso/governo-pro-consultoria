@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, ArrowRight, CheckCircle, TrendingUp, Target, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, TrendingUp, Target, AlertTriangle, Trophy, Users, Calendar, Phone } from 'lucide-react';
 
 interface LeadFormProps {
   onBack?: () => void;
@@ -150,6 +150,10 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           ]
         }
       ]
+    },
+    {
+      title: "Análise Finalizada",
+      isResult: true
     }
   ];
 
@@ -196,6 +200,106 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     );
   };
 
+  const renderResultPage = () => {
+    return (
+      <div className="text-center space-y-6">
+        {/* Success Icon */}
+        <div className="flex justify-center">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+            <Trophy className="w-10 h-10 text-green-600" />
+          </div>
+        </div>
+
+        {/* Thank You Message */}
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold text-gray-800">
+            Parabéns, {formData.nomeCompleto}!
+          </h2>
+          <p className="text-lg text-gray-600">
+            Sua análise foi concluída com sucesso
+          </p>
+        </div>
+
+        {/* Analysis Summary */}
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
+          <h3 className="font-semibold text-gray-800 mb-4 flex items-center justify-center">
+            <Target className="w-5 h-5 text-green-600 mr-2" />
+            Resumo da Sua Análise
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Setor</div>
+              <div className="text-green-600">{formData.setorEmpresa || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Experiência</div>
+              <div className="text-blue-600">{formData.experienciaLicitacoes || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Investimento</div>
+              <div className="text-purple-600">{formData.investimento || 'Não informado'}</div>
+            </div>
+            <div className="bg-white rounded-lg p-3 border">
+              <div className="font-medium text-gray-700 mb-1">Cargo</div>
+              <div className="text-orange-600">{formData.cargo || 'Não informado'}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Next Steps */}
+        <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
+          <h3 className="font-semibold text-gray-800 mb-4 flex items-center justify-center">
+            <Calendar className="w-5 h-5 text-blue-600 mr-2" />
+            Próximos Passos
+          </h3>
+          <div className="space-y-3">
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-white text-xs font-bold">1</span>
+              </div>
+              <div className="text-left">
+                <div className="font-medium text-gray-800">Análise Detalhada</div>
+                <div className="text-sm text-gray-600">Nossa equipe irá preparar uma análise personalizada do seu perfil</div>
+              </div>
+            </div>
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-white text-xs font-bold">2</span>
+              </div>
+              <div className="text-left">
+                <div className="font-medium text-gray-800">Contato Personalizado</div>
+                <div className="text-sm text-gray-600">Um especialista entrará em contato em até 24 horas</div>
+              </div>
+            </div>
+            <div className="flex items-start space-x-3">
+              <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-white text-xs font-bold">3</span>
+              </div>
+              <div className="text-left">
+                <div className="font-medium text-gray-800">Estratégia Customizada</div>
+                <div className="text-sm text-gray-600">Receberá um plano de ação específico para seu negócio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-6 text-white">
+          <div className="flex items-center justify-center mb-3">
+            <Phone className="w-6 h-6 mr-2" />
+            <h3 className="font-semibold text-lg">Fique Tranquilo!</h3>
+          </div>
+          <p className="text-green-100 mb-2">
+            Nossa equipe especializada entrará em contato com você através do telefone ou e-mail informado.
+          </p>
+          <p className="text-blue-100 text-sm">
+            📞 {formData.telefone} | 📧 {formData.email}
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50">
       {/* Logo do Mercado Nacional centralizado */}
@@ -231,58 +335,80 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
 
           {/* Step Content */}
           <div className="mb-3">
-            <h2 className="text-lg font-bold text-gray-800 mb-1">
-              {currentStepData.title}
-            </h2>
-            <p className="text-gray-600 mb-2 text-xs">
-              Preencha as informações abaixo para continuarmos sua análise personalizada.
-            </p>
+            {currentStepData.isResult ? (
+              renderResultPage()
+            ) : (
+              <>
+                <h2 className="text-lg font-bold text-gray-800 mb-1">
+                  {currentStepData.title}
+                </h2>
+                <p className="text-gray-600 mb-2 text-xs">
+                  Preencha as informações abaixo para continuarmos sua análise personalizada.
+                </p>
 
-            <div className="space-y-2">
-              {currentStepData.fields.map(renderField)}
-            </div>
+                <div className="space-y-2">
+                  {currentStepData.fields?.map(renderField)}
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Benefits Section */}
-          <div className="mb-3 p-2 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
-            <h3 className="font-semibold text-gray-800 mb-1 flex items-center text-xs">
-              <CheckCircle className="w-3 h-3 text-green-600 mr-1" />
-              Por que essas informações são importantes?
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 text-xs">
-              <div className="flex items-start">
-                <Target className="w-3 h-3 text-blue-600 mr-1 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700">Análise personalizada do seu perfil</span>
-              </div>
-              <div className="flex items-start">
-                <TrendingUp className="w-3 h-3 text-green-600 mr-1 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700">Estratégias específicas do seu setor</span>
-              </div>
-              <div className="flex items-start">
-                <AlertTriangle className="w-3 h-3 text-orange-600 mr-1 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-700">Identificação de oportunidades</span>
+          {/* Benefits Section - Only show on non-result pages */}
+          {!currentStepData.isResult && (
+            <div className="mb-3 p-2 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
+              <h3 className="font-semibold text-gray-800 mb-1 flex items-center text-xs">
+                <CheckCircle className="w-3 h-3 text-green-600 mr-1" />
+                Por que essas informações são importantes?
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 text-xs">
+                <div className="flex items-start">
+                  <Target className="w-3 h-3 text-blue-600 mr-1 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">Análise personalizada do seu perfil</span>
+                </div>
+                <div className="flex items-start">
+                  <TrendingUp className="w-3 h-3 text-green-600 mr-1 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">Estratégias específicas do seu setor</span>
+                </div>
+                <div className="flex items-start">
+                  <AlertTriangle className="w-3 h-3 text-orange-600 mr-1 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-700">Identificação de oportunidades</span>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Navigation */}
           <div className="flex justify-between mt-3">
-            <Button
-              onClick={prevStep}
-              variant="outline"
-              className="flex items-center space-x-1 border-2 border-gray-300 hover:border-green-600 h-8 px-3 text-sm"
-            >
-              <ArrowLeft className="w-3 h-3" />
-              <span>Voltar</span>
-            </Button>
+            {!currentStepData.isResult ? (
+              <>
+                <Button
+                  onClick={prevStep}
+                  variant="outline"
+                  className="flex items-center space-x-1 border-2 border-gray-300 hover:border-green-600 h-8 px-3 text-sm"
+                >
+                  <ArrowLeft className="w-3 h-3" />
+                  <span>Voltar</span>
+                </Button>
 
-            <Button
-              onClick={nextStep}
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-1 h-8 px-3 text-sm"
-            >
-              <span>{currentStep === steps.length - 1 ? 'Finalizar Análise' : 'Próximo'}</span>
-              <ArrowRight className="w-3 h-3" />
-            </Button>
+                <Button
+                  onClick={nextStep}
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-1 h-8 px-3 text-sm"
+                >
+                  <span>{currentStep === steps.length - 2 ? 'Finalizar Análise' : 'Próximo'}</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Button>
+              </>
+            ) : (
+              <div className="w-full flex justify-center">
+                <Button
+                  onClick={() => window.location.reload()}
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-2 h-10 px-6"
+                >
+                  <Users className="w-4 h-4" />
+                  <span>Nova Análise</span>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
