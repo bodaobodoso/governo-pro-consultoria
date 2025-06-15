@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,8 +12,8 @@ const Register = () => {
   const handleCheckout = () => {
     console.log('Redirecionando para checkout...');
     try {
-      // Aqui você implementaria a integração com o sistema de pagamento
-      alert('Redirecionando para o pagamento seguro...');
+      // Redirecionar para o link de checkout fornecido
+      window.open('https://pay.kirvano.com/56b4da6c-34c1-49b0-b3d8-c7bda7e4ac6a', '_blank');
     } catch (error) {
       console.error('Erro no checkout:', error);
       alert('Erro ao processar pagamento. Tente novamente.');
