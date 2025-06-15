@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,7 +61,22 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
       title: "Informações da Empresa",
       fields: [
         { key: 'cnpj', label: 'CNPJ', type: 'text', required: true },
-        { key: 'cargo', label: 'Cargo/Função', type: 'text', required: true },
+        { 
+          key: 'cargo', 
+          label: 'Qual o seu cargo na empresa?', 
+          type: 'select', 
+          required: true,
+          options: [
+            'Sócio ou Fundador',
+            'Presidente ou CEO',
+            'Vice-presidente ou C-Level',
+            'Diretor',
+            'Gerente',
+            'Coordenador',
+            'Supervisor',
+            'Analista'
+          ]
+        },
         { 
           key: 'faturamentoAnual', 
           label: 'Faturamento Anual', 
