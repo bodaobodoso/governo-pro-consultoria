@@ -16,6 +16,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const [formData, setFormData] = useState({
     nomeCompleto: '',
     email: '',
+    telefone: '',
     temWhatsapp: '',
     whatsappSocio: '',
     cnpj: '',
@@ -97,7 +98,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
         { key: 'nomeCompleto', label: 'Nome Completo', type: 'text', required: true },
         { key: 'email', label: 'E-mail', type: 'email', required: true },
         { key: 'temWhatsapp', label: 'Este telefone tem WhatsApp?', type: 'radio', required: true, options: ['Sim', 'Não'] },
-        { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante (se diferente)', type: 'tel', required: false, conditional: true }
+        { key: 'telefone', label: 'Telefone', type: 'tel', required: true, conditional: true, showWhen: 'Não' },
+        { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante (se diferente)', type: 'tel', required: false, conditional: true, showWhen: 'Sim' }
       ]
     },
     {
@@ -204,9 +206,14 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const progress = ((currentStep + 1) / steps.length) * 100;
 
   const renderField = (field: any) => {
-    // Don't show WhatsApp do sócio field if main phone has WhatsApp or if WhatsApp option not selected
-    if (field.key === 'whatsappSocio' && formData.temWhatsapp !== 'Sim') {
-      return null;
+    // Check conditional display logic
+    if (field.conditional) {
+      if (field.showWhen === 'Sim' && formData.temWhatsapp !== 'Sim') {
+        return null;
+      }
+      if (field.showWhen === 'Não' && formData.temWhatsapp !== 'Não') {
+        return null;
+      }
     }
 
     if (field.type === 'radio') {
@@ -273,6 +280,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           placeholder={
             field.key === 'whatsappSocio' 
               ? 'WhatsApp do sócio/representante (opcional)'
+              : field.key === 'telefone'
+              ? 'Digite seu telefone'
               : `Digite ${field.label.toLowerCase()}`
           }
         />
@@ -376,8 +385,10 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
             Nossa equipe especializada entrará em contato com você através do telefone ou e-mail informado.
           </p>
           <div className="text-blue-100 text-sm space-y-1">
-            <p>📞 {formData.telefone}</p>
             <p>📧 {formData.email}</p>
+            {formData.telefone && (
+              <p>📞 {formData.telefone}</p>
+            )}
             {formData.whatsappSocio && (
               <p>📱 WhatsApp Sócio: {formData.whatsappSocio}</p>
             )}
