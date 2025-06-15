@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Clock, Building, User, Rocket, MousePointer, Shield, CheckCircle, Users, Target, TrendingUp } from 'lucide-react';
+import { Clock, Building, User, Rocket, MousePointer, Shield, CheckCircle, Users, Target, TrendingUp, BarChart3, MessageSquare, FileText, Search, AlertTriangle, ChevronRight } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 import LoginArea from '@/components/LoginArea';
 import Autoplay from "embla-carousel-autoplay";
@@ -69,6 +70,45 @@ const Index = () => {
       icon: <TrendingUp className="w-8 h-8 text-blue-600" />,
       title: "ROI de 800% em média",
       description: "Retorno do investimento comprovado pelos nossos clientes"
+    }
+  ];
+
+  const platformFeatures = [
+    {
+      icon: <Search className="w-16 h-16 text-blue-600" />,
+      title: "Encontre as melhores oportunidades para o seu negócio",
+      description: "Na etapa Encontrar você começa o dia analisando novas oportunidades de negócio captadas pelos filtros inteligentes e relacionadas à sua área de atuação. De forma rápida e ágil, selecione quais editais você quer participar.",
+      stats: [
+        { label: "Oportunidades", value: "14.837" },
+        { label: "Novas Licitações", value: "2.948" }
+      ]
+    },
+    {
+      icon: <FileText className="w-16 h-16 text-green-600" />,
+      title: "Cadastre a sua proposta no portal com facilidade e agilidade",
+      description: "Reduzindo em até 80% o tempo gasto neste processo, a etapa Cadastrar automatiza o preenchimento e envia automaticamente as suas propostas aos principais portais de compras.",
+      stats: [
+        { label: "Propostas Cadastradas", value: "89" },
+        { label: "Tempo Economizado", value: "80%" }
+      ]
+    },
+    {
+      icon: <BarChart3 className="w-16 h-16 text-purple-600" />,
+      title: "Dispute vários pregões ao mesmo tempo, de maneira segura",
+      description: "Automatize o envio de lances, aumente a sua competitividade e diminua muito a chance de erros. Na etapa Disputar você participa de diversos pregões ao mesmo tempo, com facilidade e segurança, utilizando uma estratégia para garantir a melhor lucratividade possível.",
+      stats: [
+        { label: "Taxa de Sucesso", value: "82%" },
+        { label: "Aproveitamento por Item", value: "3.5" }
+      ]
+    },
+    {
+      icon: <MessageSquare className="w-16 h-16 text-orange-600" />,
+      title: "Monitore o chat do pregoeiro e não perca nenhuma convocação",
+      description: "Na etapa Monitorar você acompanha as mensagens das licitações em tempo real, enquanto realiza outras tarefas na sua empresa. A Minha Effecti te alerta sempre que a sua empresa é convocada, possibilitando que você responda ao pregoeiro sem precisar acessar o portal.",
+      stats: [
+        { label: "Alertas em Tempo Real", value: "100%" },
+        { label: "Convocações Perdidas", value: "0%" }
+      ]
     }
   ];
 
@@ -278,6 +318,67 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Platform Features Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-white/80 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Como funciona nossa <span className="text-blue-600">plataforma</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Descubra como nossa tecnologia revoluciona o processo de participação em licitações públicas
+            </p>
+          </div>
+
+          <div className="space-y-20">
+            {platformFeatures.map((feature, index) => (
+              <div key={index} className={`flex flex-col lg:flex-row items-center gap-12 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                <div className="flex-1 lg:max-w-lg">
+                  <div className="flex items-center mb-6">
+                    {feature.icon}
+                    <Badge className="ml-4 bg-gray-100 text-gray-700 px-3 py-1">
+                      Etapa {index + 1}
+                    </Badge>
+                  </div>
+                  
+                  <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4">
+                    {feature.title}
+                  </h3>
+                  
+                  <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                    {feature.description}
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    {feature.stats.map((stat, statIndex) => (
+                      <div key={statIndex} className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
+                        <div className="text-2xl font-bold text-blue-600">
+                          {stat.value}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {stat.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex-1 lg:max-w-lg">
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-xl border border-gray-100">
+                    <div className="aspect-video bg-gradient-to-br from-blue-100 to-green-100 rounded-lg flex items-center justify-center">
+                      <div className="text-center">
+                        {feature.icon}
+                        <p className="text-sm text-gray-600 mt-2">Interface da Plataforma</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
         <div className="container mx-auto">
@@ -359,6 +460,43 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Validation Alert Section */}
+      <section className="relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-green-600">
+        <div className="container mx-auto">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <div className="flex justify-center mb-6">
+              <AlertTriangle className="w-16 h-16 text-yellow-300" />
+            </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Validação Automática de Informações
+            </h2>
+            
+            <p className="text-xl mb-8 opacity-90">
+              Nossa plataforma verifica automaticamente todas as informações da sua empresa, 
+              garantindo que seus dados estejam sempre corretos e atualizados para participar das licitações.
+            </p>
+
+            <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <div className="text-3xl font-bold mb-2">100%</div>
+                  <div className="text-sm opacity-80">Verificação Automática</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-2">0</div>
+                  <div className="text-sm opacity-80">Erros de Cadastro</div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold mb-2">24/7</div>
+                  <div className="text-sm opacity-80">Monitoramento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Call to Action Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto text-center">
@@ -375,9 +513,10 @@ const Index = () => {
               <Button 
                 onClick={() => setShowForm(true)}
                 size="lg" 
-                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-10 py-4 text-xl font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-10 py-4 text-xl font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
               >
                 Começar Agora - É Gratuito
+                <ChevronRight className="w-5 h-5" />
               </Button>
               
               <div className="flex flex-col items-center text-sm text-gray-500">
