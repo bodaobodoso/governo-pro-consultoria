@@ -155,7 +155,7 @@ const Index = () => {
                   <CarouselContent>
                     {features.map((feature, index) => (
                       <CarouselItem key={index}>
-                        <div className="p-4 text-center bg-white rounded-lg shadow-md mx-2">
+                        <div className="p-4 text-center bg-white rounded-lg shadow-md">
                           <div className="flex justify-center mb-4">
                             {feature.icon}
                           </div>
