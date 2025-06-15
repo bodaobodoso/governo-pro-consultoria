@@ -97,13 +97,8 @@ const Register = () => {
               </p>
             </div>
 
-            {/* Processo leva apenas 5 minutos */}
+            {/* Features Section - Mobile: Carousel, Desktop: Grid */}
             <div className="text-center mb-6">
-              <p className="text-lg font-semibold text-gray-800 mb-8">
-                Processo leva apenas 5 minutos
-              </p>
-              
-              {/* Features Section - Mobile: Carousel, Desktop: Grid */}
               <div className="block md:hidden">
                 <Carousel
                   plugins={[
