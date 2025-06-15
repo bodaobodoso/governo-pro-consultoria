@@ -511,8 +511,8 @@ const LeadForm = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img 
-                src="https://barra.sistema.gov.br/v1/assets/govbr.webp" 
-                alt="gov.br" 
+                src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png" 
+                alt="Mercado Nacional" 
                 className="h-8 w-auto"
               />
               <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
