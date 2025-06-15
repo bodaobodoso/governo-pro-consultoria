@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,8 +14,12 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleBackToIndex = () => {
+    setShowForm(false);
+  };
+
   if (showForm) {
-    return <LeadForm />;
+    return <LeadForm onBack={handleBackToIndex} />;
   }
 
   return (

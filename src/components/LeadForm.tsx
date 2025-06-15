@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,7 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, ArrowRight, Shield, CheckCircle, TrendingUp, Target, AlertTriangle } from 'lucide-react';
 
-const LeadForm = () => {
+interface LeadFormProps {
+  onBack?: () => void;
+}
+
+const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     nomeCompleto: '',
@@ -38,6 +41,9 @@ const LeadForm = () => {
   const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
+    } else if (onBack) {
+      // Se estiver no primeiro step e houver função onBack, volta para a página anterior
+      onBack();
     }
   };
 
@@ -423,9 +429,8 @@ const LeadForm = () => {
           <div className="flex justify-between mt-8">
             <Button
               onClick={prevStep}
-              disabled={currentStep === 0}
               variant="outline"
-              className="flex items-center space-x-2 border-2 border-gray-300 hover:border-green-600 disabled:opacity-50"
+              className="flex items-center space-x-2 border-2 border-gray-300 hover:border-green-600"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Voltar</span>
