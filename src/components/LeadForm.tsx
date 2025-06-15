@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,7 +22,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     faturamentoAnual: '',
     setorEmpresa: '',
     experienciaLicitacoes: '',
-    principalObjetivo: '',
     investimento: ''
   });
 
@@ -136,10 +136,17 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           type: 'select', 
           required: true,
           options: [
-            'Até R$ 5.000',
-            'R$ 5.000 - R$ 15.000',
-            'R$ 15.000 - R$ 30.000',
-            'Acima de R$ 30.000'
+            'R$ 100 mil - R$ 250 mil',
+            'R$ 250 mil - R$ 500 mil',
+            'R$ 500 mil - R$ 1 milhão',
+            'R$ 1 milhão - R$ 2,5 milhões',
+            'R$ 2,5 milhões - R$ 5 milhões',
+            'R$ 5 milhões - R$ 10 milhões',
+            'R$ 10 milhões - R$ 25 milhões',
+            'R$ 25 milhões - R$ 50 milhões',
+            'R$ 50 milhões - R$ 100 milhões',
+            'R$ 100 milhões - R$ 250 milhões',
+            'R$ 250 milhões - R$ 500 milhões'
           ]
         }
       ]
