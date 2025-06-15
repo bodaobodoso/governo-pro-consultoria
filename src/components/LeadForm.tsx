@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -196,15 +195,14 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50">
-      {/* Header centralizado e responsivo */}
-      <div className="w-full py-4 sm:py-6 px-4">
+      {/* Logo do Mercado Nacional centralizado */}
+      <div className="w-full py-6 px-4">
         <div className="flex justify-center">
-          <div className="flex items-center">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-600 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
-              <div className="w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-sm"></div>
-            </div>
-            <span className="text-lg sm:text-xl font-bold text-gray-800">Mercado Nacional</span>
-          </div>
+          <img
+            src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png"
+            alt="Mercado Nacional"
+            className="h-12 sm:h-16 md:h-20 object-contain"
+          />
         </div>
       </div>
 
