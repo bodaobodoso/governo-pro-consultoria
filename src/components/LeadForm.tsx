@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -79,14 +78,20 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
         },
         { 
           key: 'faturamentoAnual', 
-          label: 'Faturamento Anual', 
+          label: 'Qual o faturamento anual da sua empresa?', 
           type: 'select', 
           required: true,
           options: [
-            'Até R$ 360 mil',
-            'R$ 360 mil a R$ 4,8 milhões',
-            'R$ 4,8 milhões a R$ 300 milhões',
-            'Acima de R$ 300 milhões'
+            'Acima de 1 Bilhão',
+            'De R$500 milhões a 1 Bilhão',
+            'De R$50 milhões a R$500 milhões ao ano',
+            'De R$10 milhões a R$50 milhões ao ano',
+            'De R$5 milhões a R$10 milhões ao ano',
+            'De R$1 milhão a R$5 milhões ao ano',
+            'De R$500 mil a R$1 milhão ao ano',
+            'Até R$500 mil ao ano',
+            'Menos de R$ 100 mil ao ano',
+            'Ainda não faturamos'
           ]
         }
       ]
@@ -177,7 +182,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
             {field.label} {field.required && <span className="text-red-500">*</span>}
           </Label>
           <Select value={formData[field.key as keyof typeof formData]} onValueChange={(value) => updateFormData(field.key, value)}>
-            <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-green-500">
+            <SelectTrigger className="h-10 border-2 border-gray-200 focus:border-green-500">
               <SelectValue placeholder={`Selecione ${field.label.toLowerCase()}`} />
             </SelectTrigger>
             <SelectContent>
@@ -202,7 +207,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
           type={field.type}
           value={formData[field.key as keyof typeof formData]}
           onChange={(e) => updateFormData(field.key, e.target.value)}
-          className="h-12 border-2 border-gray-200 focus:border-green-500"
+          className="h-10 border-2 border-gray-200 focus:border-green-500"
           placeholder={`Digite seu ${field.label.toLowerCase()}`}
         />
       </div>
@@ -211,21 +216,21 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50">
-      {/* Logo do Mercado Nacional centralizado - reduzido */}
-      <div className="w-full py-2 sm:py-3 px-4">
+      {/* Logo do Mercado Nacional centralizado */}
+      <div className="w-full py-1 px-4">
         <div className="flex justify-center">
           <img
             src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png"
             alt="Mercado Nacional"
-            className="h-8 sm:h-10 md:h-12 object-contain"
+            className="h-6 sm:h-8 md:h-10 object-contain"
           />
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-2 max-w-2xl">
-        <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6">
-          {/* Progress Bar - compacto */}
-          <div className="mb-4">
+      <div className="container mx-auto px-4 py-1 max-w-2xl">
+        <div className="bg-white rounded-2xl shadow-xl p-3 sm:p-4">
+          {/* Progress Bar */}
+          <div className="mb-3">
             <div className="flex justify-between items-center mb-1">
               <span className="text-xs font-medium text-gray-600">
                 Etapa {currentStep + 1} de {steps.length}
@@ -234,67 +239,67 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
                 {Math.round(progress)}% concluído
               </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5">
+            <div className="w-full bg-gray-200 rounded-full h-1">
               <div 
-                className="bg-gradient-to-r from-green-500 to-blue-500 h-1.5 rounded-full transition-all duration-500 ease-out"
+                className="bg-gradient-to-r from-green-500 to-blue-500 h-1 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
           </div>
 
-          {/* Step Content - espaçamento reduzido */}
-          <div className="mb-4">
-            <h2 className="text-xl font-bold text-gray-800 mb-1">
+          {/* Step Content */}
+          <div className="mb-3">
+            <h2 className="text-lg font-bold text-gray-800 mb-1">
               {currentStepData.title}
             </h2>
-            <p className="text-gray-600 mb-3 text-sm">
+            <p className="text-gray-600 mb-2 text-xs">
               Preencha as informações abaixo para continuarmos sua análise personalizada.
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {currentStepData.fields.map(renderField)}
             </div>
           </div>
 
-          {/* Benefits Section - mais compacto */}
-          <div className="mb-4 p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
-            <h3 className="font-semibold text-gray-800 mb-2 flex items-center text-sm">
-              <CheckCircle className="w-4 h-4 text-green-600 mr-2" />
+          {/* Benefits Section */}
+          <div className="mb-3 p-2 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-green-200">
+            <h3 className="font-semibold text-gray-800 mb-1 flex items-center text-xs">
+              <CheckCircle className="w-3 h-3 text-green-600 mr-1" />
               Por que essas informações são importantes?
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 text-xs">
               <div className="flex items-start">
-                <Target className="w-3 h-3 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                <Target className="w-3 h-3 text-blue-600 mr-1 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-700">Análise personalizada do seu perfil</span>
               </div>
               <div className="flex items-start">
-                <TrendingUp className="w-3 h-3 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                <TrendingUp className="w-3 h-3 text-green-600 mr-1 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-700">Estratégias específicas do seu setor</span>
               </div>
               <div className="flex items-start">
-                <AlertTriangle className="w-3 h-3 text-orange-600 mr-2 mt-0.5 flex-shrink-0" />
+                <AlertTriangle className="w-3 h-3 text-orange-600 mr-1 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-700">Identificação de oportunidades</span>
               </div>
             </div>
           </div>
 
-          {/* Navigation - espaçamento reduzido */}
-          <div className="flex justify-between mt-4">
+          {/* Navigation */}
+          <div className="flex justify-between mt-3">
             <Button
               onClick={prevStep}
               variant="outline"
-              className="flex items-center space-x-2 border-2 border-gray-300 hover:border-green-600 h-9 px-4"
+              className="flex items-center space-x-1 border-2 border-gray-300 hover:border-green-600 h-8 px-3 text-sm"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3 h-3" />
               <span>Voltar</span>
             </Button>
 
             <Button
               onClick={nextStep}
-              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-2 h-9 px-4"
+              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white flex items-center space-x-1 h-8 px-3 text-sm"
             >
               <span>{currentStep === steps.length - 1 ? 'Finalizar Análise' : 'Próximo'}</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3 h-3" />
             </Button>
           </div>
         </div>
