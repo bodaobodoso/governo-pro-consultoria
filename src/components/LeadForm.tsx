@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,9 +17,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const [formData, setFormData] = useState({
     nomeCompleto: '',
     email: '',
-    telefone: '',
-    temWhatsapp: '',
-    whatsappSocio: '',
+    whatsapp: '',
     cnpj: '',
     cargo: '',
     faturamentoAnual: '',
@@ -97,9 +96,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
       fields: [
         { key: 'nomeCompleto', label: 'Nome Completo', type: 'text', required: true },
         { key: 'email', label: 'E-mail', type: 'email', required: true },
-        { key: 'temWhatsapp', label: 'Este telefone tem WhatsApp?', type: 'radio', required: true, options: ['Sim', 'Não'] },
-        { key: 'telefone', label: 'Telefone', type: 'tel', required: true, conditional: true, showWhen: 'Não' },
-        { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante', type: 'tel', required: false, conditional: true, showWhen: 'Sim' }
+        { key: 'whatsapp', label: 'WhatsApp', type: 'tel', required: true }
       ]
     },
     {
@@ -206,16 +203,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const progress = ((currentStep + 1) / steps.length) * 100;
 
   const renderField = (field: any) => {
-    // Check conditional display logic
-    if (field.conditional) {
-      if (field.showWhen === 'Sim' && formData.temWhatsapp !== 'Sim') {
-        return null;
-      }
-      if (field.showWhen === 'Não' && formData.temWhatsapp !== 'Não') {
-        return null;
-      }
-    }
-
     if (field.type === 'radio') {
       return (
         <div key={field.key} className="space-y-2">
@@ -278,10 +265,8 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
               : ''
           }`}
           placeholder={
-            field.key === 'whatsappSocio' 
-              ? 'WhatsApp do sócio/representante (opcional)'
-              : field.key === 'telefone'
-              ? 'Digite seu telefone'
+            field.key === 'whatsapp' 
+              ? 'Digite seu WhatsApp'
               : `Digite ${field.label.toLowerCase()}`
           }
         />
@@ -382,15 +367,12 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
             <h3 className="font-semibold text-lg">Fique Tranquilo!</h3>
           </div>
           <p className="text-green-100 mb-2">
-            Nossa equipe especializada entrará em contato com você através do telefone ou e-mail informado.
+            Nossa equipe especializada entrará em contato com você através do WhatsApp ou e-mail informado.
           </p>
           <div className="text-blue-100 text-sm space-y-1">
             <p>📧 {formData.email}</p>
-            {formData.telefone && (
-              <p>📞 {formData.telefone}</p>
-            )}
-            {formData.whatsappSocio && (
-              <p>📱 WhatsApp Sócio: {formData.whatsappSocio}</p>
+            {formData.whatsapp && (
+              <p>📱 WhatsApp: {formData.whatsapp}</p>
             )}
           </div>
         </div>
