@@ -510,6 +510,11 @@ const LeadForm = () => {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
+              <img 
+                src="https://barra.sistema.gov.br/v1/assets/govbr.webp" 
+                alt="gov.br" 
+                className="h-8 w-auto"
+              />
               <div className="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
                 <Shield className="w-5 h-5 text-white" />
               </div>
