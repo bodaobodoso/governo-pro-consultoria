@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -221,6 +222,11 @@ const Index = () => {
               </Button>
             </div>
 
+            <div className="mb-10 flex items-center justify-center text-slate-600 text-sm">
+              <Clock className="w-4 h-4 mr-2" />
+              Processo leva apenas 5 minutos
+            </div>
+
             <div className="mb-10">
               {/* Mobile Carousel */}
               <div className="block md:hidden">
@@ -268,11 +274,6 @@ const Index = () => {
                   </div>
                 ))}
               </div>
-            </div>
-            
-            <div className="flex items-center justify-center text-slate-600 text-sm">
-              <Clock className="w-4 h-4 mr-2" />
-              Processo leva apenas 5 minutos
             </div>
           </div>
         </div>
