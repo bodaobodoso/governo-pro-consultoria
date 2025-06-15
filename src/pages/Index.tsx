@@ -1,11 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Building } from 'lucide-react';
+import { Clock, Building, User } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
+import LoginArea from '@/components/LoginArea';
 
 const Index = () => {
   const [showForm, setShowForm] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -18,12 +21,36 @@ const Index = () => {
     setShowForm(false);
   };
 
+  const handleCloseLogin = () => {
+    setShowLogin(false);
+  };
+
   if (showForm) {
     return <LeadForm onBack={handleBackToIndex} />;
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-hidden">
+      {/* Header com botão de login */}
+      <header className="absolute top-0 left-0 right-0 z-20 p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="flex items-center">
+            <img 
+              src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png" 
+              alt="Mercado Nacional" 
+              className="h-8 w-auto"
+            />
+          </div>
+          <Button 
+            onClick={() => setShowLogin(true)}
+            className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg transition-all duration-300 hover:shadow-xl"
+          >
+            <User className="w-4 h-4" />
+            Entrar com gov.br
+          </Button>
+        </div>
+      </header>
+
       {/* Manter os elementos 3D sutis de fundo */}
       <div className="fixed inset-0 pointer-events-none">
         {/* Elementos 3D corporativos sutis */}
@@ -58,7 +85,7 @@ const Index = () => {
       </div>
 
       {/* Hero Section seguindo exatamente o layout da imagem */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
         <div className="container mx-auto text-center relative z-10 max-w-4xl">
           <div className="transform transition-all duration-700">
             {/* Badge exato da imagem */}
@@ -105,6 +132,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Modal de Login */}
+      {showLogin && <LoginArea onClose={handleCloseLogin} />}
     </div>
   );
 };
