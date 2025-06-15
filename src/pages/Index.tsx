@@ -74,12 +74,12 @@ const Index = () => {
             </Badge>
             
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-gray-900 mb-6 sm:mb-8 leading-tight">
-              <span className="text-green-600 drop-shadow-lg">O Governo Compra</span>
+              <span className="text-green-600 drop-shadow-lg">R$ 5,8 Trilhões</span>
               <br />
-              <span className="text-blue-700 drop-shadow-lg">Bilhões Todos os Anos.</span>
+              <span className="text-blue-700 drop-shadow-lg">Liberados pelo</span>
               <br />
               <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-                Descubra Como Vender Para Ele!
+                Governo Federal
               </span>
             </h1>
             
