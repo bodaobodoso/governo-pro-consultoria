@@ -131,18 +131,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
       title: "Objetivos e Expectativas",
       fields: [
         { 
-          key: 'principalObjetivo', 
-          label: 'Principal Objetivo', 
-          type: 'select', 
-          required: true,
-          options: [
-            'Começar a participar de licitações',
-            'Aumentar o número de contratos',
-            'Melhorar a taxa de sucesso',
-            'Expandir para novos órgãos'
-          ]
-        },
-        { 
           key: 'investimento', 
           label: 'Investimento Pretendido', 
           type: 'select', 
