@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { Clock, Building, User, Rocket, MousePointer, Shield } from 'lucide-react';
+import { Clock, Building, User, Rocket, MousePointer, Shield, CheckCircle, Users, Target, TrendingUp } from 'lucide-react';
 import LeadForm from '@/components/LeadForm';
 import LoginArea from '@/components/LoginArea';
 import Autoplay from "embla-carousel-autoplay";
@@ -50,13 +50,36 @@ const Index = () => {
     }
   ];
 
+  const benefits = [
+    {
+      icon: <CheckCircle className="w-8 h-8 text-green-600" />,
+      title: "Aumento de até 300% nas vendas",
+      description: "Empresas que utilizam nossa plataforma aumentam significativamente seu faturamento"
+    },
+    {
+      icon: <Users className="w-8 h-8 text-blue-600" />,
+      title: "Mais de 5.000 empresas cadastradas",
+      description: "Faça parte do maior ecossistema de fornecedores do governo"
+    },
+    {
+      icon: <Target className="w-8 h-8 text-green-600" />,
+      title: "95% de taxa de aprovação",
+      description: "Nossa consultoria garante alta taxa de sucesso nos processos"
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8 text-blue-600" />,
+      title: "ROI de 800% em média",
+      description: "Retorno do investimento comprovado pelos nossos clientes"
+    }
+  ];
+
   if (showForm) {
     return <LeadForm onBack={handleBackToIndex} />;
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-hidden">
-      {/* Header com logo à esquerda e botão de login à direita */}
+      {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 p-4">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
@@ -77,9 +100,8 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Manter os elementos 3D sutis de fundo */}
+      {/* Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
-        {/* Elementos 3D corporativos sutis */}
         <div 
           className="absolute top-20 left-8 w-32 h-32 bg-gradient-to-br from-green-600/10 to-blue-600/10 rounded-lg transform rotate-12 shadow-2xl"
           style={{ 
@@ -110,11 +132,10 @@ const Index = () => {
         />
       </div>
 
-      {/* Hero Section seguindo exatamente o layout da imagem */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
         <div className="container mx-auto text-center relative z-10 max-w-4xl">
           <div className="transform transition-all duration-700">
-            {/* Badge exato da imagem */}
             <div className="mb-8">
               <Badge className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-2 text-sm font-bold rounded-full shadow-lg">
                 <Building className="w-4 h-4 mr-2" />
@@ -122,7 +143,6 @@ const Index = () => {
               </Badge>
             </div>
             
-            {/* Título principal exato da imagem */}
             <div className="mb-8">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight">
                 <span className="text-green-600">R$ 5,8 Trilhões</span>
@@ -133,14 +153,12 @@ const Index = () => {
               </h1>
             </div>
             
-            {/* Subtítulo exato da imagem */}
             <div className="mb-10 max-w-3xl mx-auto">
               <p className="text-lg sm:text-xl md:text-2xl text-slate-700 font-medium leading-relaxed">
                 Aproveite as oportunidades da <span className="text-green-600 font-bold">LOA 2025</span> e transforme sua empresa em um fornecedor oficial do governo brasileiro
               </p>
             </div>
             
-            {/* Features Section - Mobile: Carousel, Desktop: Grid */}
             <div className="mb-10">
               {/* Mobile Carousel */}
               <div className="block md:hidden">
@@ -190,7 +208,6 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Botão e informação de tempo exatos da imagem */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
                 onClick={() => setShowForm(true)}
@@ -203,6 +220,73 @@ const Index = () => {
               <div className="flex items-center text-slate-600 text-sm">
                 <Clock className="w-4 h-4 mr-2" />
                 Processo leva apenas 5 minutos
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Por que escolher o <span className="text-green-600">Mercado Nacional</span>?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Somos a maior plataforma de conexão entre empresas e órgãos públicos do Brasil, 
+              com resultados comprovados e expertise consolidada no mercado.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="flex justify-center mb-4">
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Pronto para <span className="text-blue-600">transformar</span> seu negócio?
+            </h2>
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed">
+              Não perca a oportunidade de fazer parte do maior mercado do país. 
+              Nossa consultoria especializada vai te guiar em cada passo do processo.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Button 
+                onClick={() => setShowForm(true)}
+                size="lg" 
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-10 py-4 text-xl font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+              >
+                Começar Agora - É Gratuito
+              </Button>
+              
+              <div className="flex flex-col items-center text-sm text-gray-500">
+                <div className="flex items-center mb-1">
+                  <Clock className="w-4 h-4 mr-2" />
+                  Consultoria 100% gratuita
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                  Sem compromisso inicial
+                </div>
               </div>
             </div>
           </div>
