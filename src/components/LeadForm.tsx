@@ -16,7 +16,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
   const [formData, setFormData] = useState({
     nomeCompleto: '',
     email: '',
-    telefone: '',
     temWhatsapp: '',
     whatsappSocio: '',
     cnpj: '',
@@ -97,7 +96,6 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
       fields: [
         { key: 'nomeCompleto', label: 'Nome Completo', type: 'text', required: true },
         { key: 'email', label: 'E-mail', type: 'email', required: true },
-        { key: 'telefone', label: 'Telefone Principal', type: 'tel', required: true },
         { key: 'temWhatsapp', label: 'Este telefone tem WhatsApp?', type: 'radio', required: true, options: ['Sim', 'Não'] },
         { key: 'whatsappSocio', label: 'WhatsApp do Sócio/Representante (se diferente)', type: 'tel', required: false, conditional: true }
       ]
