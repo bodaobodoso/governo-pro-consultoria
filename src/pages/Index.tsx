@@ -36,65 +36,61 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-green-50">
       {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-20 p-4">
+      <header className="absolute top-0 left-0 right-0 z-20 p-3 md:p-4">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <img 
               src="https://omercadonacional.com.br/wp-content/uploads/2025/04/mercado-nacional-new-v1.png" 
               alt="Mercado Nacional" 
-              className="h-6 md:h-8 w-auto"
+              className="h-5 md:h-7 w-auto"
             />
           </div>
           
           <Button 
             onClick={() => setShowLogin(true)}
-            className="bg-blue-700 hover:bg-blue-800 text-white px-4 md:px-6 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg transition-all duration-300 hover:shadow-xl text-sm md:text-base"
+            className="bg-blue-700 hover:bg-blue-800 text-white px-3 md:px-5 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg transition-all duration-300 hover:shadow-xl text-xs md:text-sm"
           >
-            <User className="w-4 h-4" />
+            <User className="w-3 h-3 md:w-4 md:h-4" />
             <span className="hidden sm:inline">Entrar</span>
           </Button>
         </div>
       </header>
 
-      {/* Background Elements - Optimized for mobile */}
-      <div className="fixed inset-0 pointer-events-none">
+      {/* Background Elements - Simplified and optimized */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div 
-          className="absolute top-20 left-4 md:left-8 w-24 md:w-32 h-24 md:h-32 bg-gradient-to-br from-green-600/10 to-blue-600/10 rounded-lg transform rotate-12 shadow-2xl"
+          className="absolute top-16 left-2 md:left-6 w-16 md:w-24 h-16 md:h-24 bg-gradient-to-br from-green-600/8 to-blue-600/8 rounded-lg transform rotate-12 shadow-lg"
           style={{ 
-            transform: `translateY(${scrollY * 0.02}px) rotateX(15deg) rotateY(${scrollY * 0.01}deg)`,
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+            transform: `translateY(${scrollY * 0.01}px) rotate(12deg)`
           }}
         />
         <div 
-          className="absolute top-40 right-6 md:right-12 w-20 md:w-24 h-20 md:h-24 bg-gradient-to-br from-blue-700/12 to-green-700/12 rounded-full transform -rotate-6 shadow-xl"
+          className="absolute top-32 right-4 md:right-8 w-12 md:w-16 h-12 md:h-16 bg-gradient-to-br from-blue-700/10 to-green-700/10 rounded-full transform -rotate-6 shadow-lg"
           style={{ 
-            transform: `translateY(${scrollY * -0.03}px) rotateX(-10deg) rotateZ(${scrollY * -0.008}deg)`,
-            boxShadow: '0 20px 40px -8px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.1)'
+            transform: `translateY(${scrollY * -0.015}px) rotate(-6deg)`
           }}
         />
         <div 
-          className="absolute bottom-32 left-8 md:left-16 w-32 md:w-40 h-16 md:h-20 bg-gradient-to-r from-slate-400/8 to-blue-500/8 rounded-2xl transform rotate-3 shadow-lg"
+          className="absolute bottom-24 left-4 md:left-12 w-20 md:w-28 h-10 md:h-14 bg-gradient-to-r from-slate-400/6 to-blue-500/6 rounded-xl transform rotate-3 shadow-sm"
           style={{ 
-            transform: `translateY(${scrollY * 0.01}px) rotateX(8deg) rotateY(${scrollY * 0.005}deg)`,
-            boxShadow: '0 15px 30px -10px rgba(0, 0, 0, 0.1)'
+            transform: `translateY(${scrollY * 0.008}px) rotate(3deg)`
           }}
         />
         <div 
-          className="absolute bottom-20 right-4 md:right-8 w-24 md:w-28 h-24 md:h-28 bg-gradient-to-tl from-green-800/10 to-blue-800/10 rounded-lg transform -rotate-12 shadow-xl"
+          className="absolute bottom-16 right-2 md:right-6 w-16 md:w-20 h-16 md:h-20 bg-gradient-to-tl from-green-800/8 to-blue-800/8 rounded-lg transform -rotate-12 shadow-lg"
           style={{ 
-            transform: `translateY(${scrollY * -0.02}px) rotateX(12deg) rotateZ(${scrollY * 0.01}deg)`,
-            boxShadow: '0 20px 40px -12px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.1)'
+            transform: `translateY(${scrollY * -0.01}px) rotate(-12deg)`
           }}
         />
       </div>
 
-      {/* Hero Section with Features Grid */}
+      {/* Hero Section */}
       <HeroSection onShowForm={() => setShowForm(true)} />
       
-      {/* Features Grid Section */}
-      <section className="relative py-8 md:py-16 px-4">
+      {/* Features Grid Section - Reduced spacing */}
+      <section className="relative py-4 md:py-8 px-4">
         <div className="container mx-auto">
           <FeaturesGrid />
         </div>
