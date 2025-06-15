@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,6 +23,21 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     experienciaLicitacoes: '',
     investimento: ''
   });
+
+  // Add keyboard event listener for Enter key
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && !currentStepData.isResult) {
+        event.preventDefault();
+        nextStep();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [currentStep]);
 
   const updateFormData = (field: string, value: string) => {
     setFormData(prev => ({
