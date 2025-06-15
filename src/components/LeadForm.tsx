@@ -16,7 +16,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     nomeCompleto: '',
     email: '',
     telefone: '',
-    empresa: '',
+    cnpj: '',
     cargo: '',
     faturamentoAnual: '',
     setorEmpresa: '',
@@ -59,7 +59,7 @@ const LeadForm: React.FC<LeadFormProps> = ({ onBack }) => {
     {
       title: "Informações da Empresa",
       fields: [
-        { key: 'empresa', label: 'Nome da Empresa', type: 'text', required: true },
+        { key: 'cnpj', label: 'CNPJ', type: 'text', required: true },
         { key: 'cargo', label: 'Cargo/Função', type: 'text', required: true },
         { 
           key: 'faturamentoAnual', 
